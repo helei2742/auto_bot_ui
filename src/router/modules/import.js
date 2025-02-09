@@ -20,38 +20,39 @@ const importRouter = {
     },
     {
       path: 'import-proxy-info',
-      component: () => import('@/views/table/dynamic-table/index'),
+      component: () => import('@/views/custom/import/import-proxy-info'),
       name: 'ImportProxyInfo',
       meta: { title: '导入代理', icon: 'international' }
     },
     {
       path: 'import-browser-env-info',
-      component: () => import('@/views/table/dynamic-table/index'),
+      component: () => import('@/views/custom/import/import-browser-env.vue'),
       name: 'ImportBrowserEnvInfo',
       meta: { title: '导入浏览器环境', icon: 'browser' }
     },
     {
       path: 'import-social-account',
-      component: () => import('@/views/table/dynamic-table/index'),
+      component: () => import('@/views/custom/import/index'),
       name: 'ImportSocialAccount',
+      redirect: '@/views/custom/import/import-twitter-account',
       meta: { title: '导入社交账号', icon: 'social' },
       children: [
         {
           path: 'twitter',
-          component: () => import('@/views/nested/menu1/index'), // Parent router-view
+          component: () => import('@/views/custom/import/social/import-twitter-account.vue'), // Parent router-view
           name: 'twitter',
           meta: { title: 'twitter', icon: 'twitter' }
         },
         {
           path: 'discord',
           name: 'discord',
-          component: () => import('@/views/nested/menu2/index'),
+          component: () => import('@/views/custom/import/social/import-discord-account.vue'),
           meta: { title: 'discord', icon: 'discord' }
         },
         {
           path: 'telegram',
           name: 'telegram',
-          component: () => import('@/views/nested/menu2/index'),
+          component: () => import('@/views/custom/import/social/import-telegram-account.vue'),
           meta: { title: 'telegram', icon: 'telegram' }
         }
       ]
