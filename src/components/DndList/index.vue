@@ -14,6 +14,7 @@
           </div>
         </div>
       </draggable>
+
     </div>
     <div :style="{width:width2}" class="dndList-list">
       <h3>{{ list2Title }}</h3>

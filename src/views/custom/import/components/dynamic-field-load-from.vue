@@ -5,12 +5,12 @@
     width="80%"
   >
 
-    <div class="components-container" slot="title">
+    <div slot="title" class="components-container">
       <h3>请按照下方输入框中模板填入需导入的数据</h3>
 
       <el-switch
-        style="display: block;float: right"
         v-model="isJsonType"
+        style="display: block;float: right"
         active-color="#c59172"
         inactive-color="#13ce66"
         active-text="JSON格式"
@@ -25,44 +25,48 @@
       <div v-if="isJsonType" class="components-container">
         <aside>
           注意, 格式为一个JSON数组, 数组里的元素为每一条数据
-          <br/>
+          <br>
           需包含 {{ fieldNames }} 字段
         </aside>
 
         <div class="editor-container">
-          <json-editor ref="jsonEditor" v-model="jsonValue"/>
+          <json-editor ref="jsonEditor" v-model="jsonValue" />
         </div>
       </div>
       <!--    excel类型数据导入-->
       <div v-else class="components-container">
         <aside>
           注意, excel文件的列
-          <br/>
+          <br>
           需包含 {{ fieldNames }} 字段
         </aside>
 
-        <upload-excel-component :on-success="handleExcelUploadSuccess" :before-upload="beforeExcelUpload"/>
+        <upload-excel-component :on-success="handleExcelUploadSuccess" :before-upload="beforeExcelUpload" />
 
-        <el-table :data="excelValue"
-                  border
-                  show-header
-                  highlight-current-row
-                  height="600"
-                  :row-class-name="tableRowClassName"
-                  style="width: 100%;margin-top:20px;"
+        <el-table
+          :data="excelValue"
+          border
+          show-header
+          highlight-current-row
+          height="600"
+          :row-class-name="tableRowClassName"
+          style="width: 100%;margin-top:20px;"
         >
           <el-table-column v-for="item of useHeader" :key="item" :prop="item" :label="item">
             <template slot="header">
-              {{item}}
+              {{ item }}
               <el-badge
                 v-if="fieldNames.includes(item)"
-                class="header-badge" :value="''" :max="99" :is-dot="true" />
+                class="header-badge"
+                :value="''"
+                :max="99"
+                :is-dot="true"
+              />
             </template>
           </el-table-column>
         </el-table>
       </div>
     </div>
-
 
     <div slot="footer" class="dialog-footer">
       <el-button @click="isVisible = false">
@@ -112,6 +116,11 @@ export default {
       customFields: []
     }
   },
+  computed: {
+    useHeader() {
+      return this.excelHeaders.length === 0 ? this.fieldNames : this.excelHeaders
+    }
+  },
   created() {
     const template = {}
 
@@ -121,11 +130,6 @@ export default {
     })
 
     this.jsonValue.push(template)
-  },
-  computed: {
-    useHeader() {
-      return this.excelHeaders.length === 0 ? this.fieldNames : this.excelHeaders
-    }
   },
   methods: {
     toggleVisible() {
@@ -251,16 +255,16 @@ export default {
           }
         )
       } else {
-        this.$emit('batch-data-import', {filteredData, customFields: this.customFields})
+        this.$emit('batch-data-import', { filteredData, customFields: this.customFields })
         this.isVisible = false
       }
     },
 
-    tableRowClassName({row, rowIndex}) {
+    tableRowClassName({ row, rowIndex }) {
       if (this.checkDataItem(row)) {
-        return 'success-row';
-      } else{
-        return 'warning-row';
+        return 'success-row'
+      } else {
+        return 'warning-row'
       }
     }
   }

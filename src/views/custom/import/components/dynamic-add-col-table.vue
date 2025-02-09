@@ -1,20 +1,18 @@
 <template>
   <div>
-
     <!--    头部搜索、添加、上传 bar-->
     <div class="filter-container">
       <el-select
         v-for="headerName in fullHeaders"
         v-model="headerFilterFieldValues[headerName]"
-        @clear="headerFilterFieldValues[headerName] = undefined"
         :placeholder="headerName"
         clearable
         style="width: 90px"
         class="filter-item"
+        @clear="headerFilterFieldValues[headerName] = undefined"
       >
-        <el-option v-for="item in getFieldOptions(headerName)" :key="item" :label="item" :value="item"/>
+        <el-option v-for="item in getFieldOptions(headerName)" :key="item" :label="item" :value="item" />
       </el-select>
-
 
       <el-button
         v-waves
@@ -26,8 +24,12 @@
       >
         Search
       </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit"
-                 @click="addBatchRowData"
+      <el-button
+        class="filter-item"
+        style="margin-left: 10px;"
+        type="primary"
+        icon="el-icon-edit"
+        @click="addBatchRowData"
       >
         Add
       </el-button>
@@ -46,17 +48,19 @@
       style="width: 100%;"
       @selection-change="handleSelectionChange"
     >
-      <el-table-column type="selection" width="55"/>
+      <el-table-column type="selection" width="55" />
 
-      <el-table-column type="index" class-name="status-col" min-width="75">
-      </el-table-column>
+      <el-table-column type="index" class-name="status-col" min-width="75" />
 
       <el-table-column v-for="headName in fullHeaders" :label="headName" class-name="status-col" min-width="100">
         <template slot="header">
           {{ headName }}
           <el-badge
             v-if="headers.includes(headName)"
-            class="header-badge" :value="''" :max="99" :is-dot="true"
+            class="header-badge"
+            :value="''"
+            :max="99"
+            :is-dot="true"
           />
         </template>
 
@@ -90,8 +94,11 @@
 
       <el-table-column align="right" width="200">
         <template #header>
-          <el-input v-model="newHeaderName" size="small" placeholder="输入新列名"
-                    style="display: inline-block;width: 60%"
+          <el-input
+            v-model="newHeaderName"
+            size="small"
+            placeholder="输入新列名"
+            style="display: inline-block;width: 60%"
           />
           <el-button type="primary" size="small" @click="addNewHeaderField">
             Add
@@ -114,20 +121,25 @@
     </el-table>
 
     <!--分页条-->
-    <pagination v-show="data !== null && data.length >0"
-                :total="data.length"
-                :page.sync="listQuery.page"
-                :limit.sync="listQuery.limit"
+    <pagination
+      v-show="data !== null && data.length >0"
+      :total="data.length"
+      :page.sync="listQuery.page"
+      :limit.sync="listQuery.limit"
     />
 
     <!--    表格单行编辑弹框-->
     <el-dialog :title="'编辑第 ' + editRowIndex + '行数据'" :visible.sync="editRowFromVisible">
 
-      <el-form ref="dataForm" :rules="rules" :model="editRowData" label-position="left"
-               style="width: 400px; margin-left:50px;"
+      <el-form
+        ref="dataForm"
+        :rules="rules"
+        :model="editRowData"
+        label-position="left"
+        style="width: 400px; margin-left:50px;"
       >
         <el-form-item v-for="headName in fullHeaders" :label="headName" prop="headName">
-          <el-input v-if="editRowData !== null" v-model="editRowData[headName]"/>
+          <el-input v-if="editRowData !== null" v-model="editRowData[headName]" />
         </el-form-item>
       </el-form>
 
@@ -186,7 +198,6 @@ export default {
         return []
       }
     }
-
   },
   data() {
     return {
@@ -200,16 +211,9 @@ export default {
         limit: 20
       },
       headerFilterFieldValues: {},
-      rules: {
-        type: [{ required: true, message: 'type is required', trigger: 'change' }],
-        timestamp: [{ type: 'date', required: true, message: 'timestamp is required', trigger: 'change' }],
-        title: [{ required: true, message: 'title is required', trigger: 'blur' }]
-      },
       filteredTableDataIdxes: new Set(),
       selectedDataList: []
     }
-  },
-  created() {
   },
   computed: {
     fullHeaders() {
@@ -218,6 +222,9 @@ export default {
     fieldLoadFromRef() {
       return 'dynamicFieldLoadFrom[' + this.headers + ']'
     }
+  },
+  created() {
+
   },
   methods: {
     handleDelete(idx, row) {
@@ -235,13 +242,12 @@ export default {
     handleFilter() {
       this.filteredTableDataIdxes.clear()
 
-      console.log(this.headerFilterFieldValues)
       for (let i = 0; i < this.data.length; i++) {
-        let line = this.data[i]
+        const line = this.data[i]
         let flag = true
-        for (let headName of this.fullHeaders) {
-          let targetValue = this.headerFilterFieldValues[headName]
-          let currentValue = line[headName]
+        for (const headName of this.fullHeaders) {
+          const targetValue = this.headerFilterFieldValues[headName]
+          const currentValue = line[headName]
 
           if (targetValue !== undefined && targetValue !== currentValue) {
             flag = false
@@ -274,9 +280,9 @@ export default {
       this.editRowFromVisible = false
     },
     addNewHeaderField() {
-      if (this.newHeaderName === null
-        || this.newHeaderName === undefined
-        || this.newHeaderName === ''
+      if (this.newHeaderName === null ||
+        this.newHeaderName === undefined ||
+        this.newHeaderName === ''
       ) {
         return
       }
@@ -300,12 +306,12 @@ export default {
       }
     },
     getFieldOptions(headerName) {
-      let set = new Set()
+      const set = new Set()
 
       if (this.data === undefined || this.data === null) return {}
 
-      for (let line of this.data) {
-        let fieldValue = line[headerName]
+      for (const line of this.data) {
+        const fieldValue = line[headerName]
 
         if (fieldValue !== undefined) {
           set.add(fieldValue == null ? 'null' : fieldValue)
@@ -315,7 +321,7 @@ export default {
       return set
     },
     filteredTableData() {
-      let res = []
+      const res = []
       for (let i = 0; i < this.data.length; i++) {
         if (!this.filteredTableDataIdxes.has(i)) {
           res.push(this.data[i])
@@ -326,8 +332,8 @@ export default {
       return res.slice(startIndex, endIndex)
     },
     buildRowStatus(row) {
-      return this.headers.every(header => row[header] !== undefined
-        && row[header] !== null && row[header] !== '')
+      return this.headers.every(header => row[header] !== undefined &&
+        row[header] !== null && row[header] !== '')
     }
   }
 }

@@ -5,7 +5,7 @@ import Layout from '@/layout'
 const importRouter = {
   path: '/import',
   component: Layout,
-  redirect: '/table/complex-table',
+  redirect: '/import/import-account-base-info',
   name: 'Table',
   meta: {
     title: '导入',

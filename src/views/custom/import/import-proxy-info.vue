@@ -21,21 +21,27 @@ export default {
         'proxy_protocol', 'host', 'port'
       ],
       proxyInfoList: [
-        { id: 1, proxy_protocol: 'http', host: 'test1', port: 'test1231awnkj3@qq.com', username:'helei',password: '12321312312' },
-        { id: 2, proxy_protocol: 'http', host: 'test1', port: 'test1231awnkj3@qq.com', username:'helei',password: '12321312312' },
-        { id: 3, proxy_protocol: 'http', host: 'test1', port: 'test1231awnkj3@qq.com', username:'helei',password: '12321312312' },
-        { id: 4, proxy_protocol: 'http', host: 'test1', port: 'test1231awnkj3@qq.com', username:'helei',password: '12321312312' },
-        { id: 5, proxy_protocol: 'http', host: 'test1', port: 'test1231awnkj3@qq.com', username:'helei',password: '12321312312' },
-        { id: 6, proxy_protocol: 'http', host: 'test1', port: 'test1231awnkj3@qq.com', username:'helei',password: '12321312312' },
+        { id: 1, proxy_protocol: 'http', host: 'test1', port: 'test1231awnkj3@qq.com', username: 'helei', password: '12321312312' },
+        { id: 2, proxy_protocol: 'http', host: 'test1', port: 'test1231awnkj3@qq.com', username: 'helei', password: '12321312312' },
+        { id: 3, proxy_protocol: 'http', host: 'test1', port: 'test1231awnkj3@qq.com', username: 'helei', password: '12321312312' },
+        { id: 4, proxy_protocol: 'http', host: 'test1', port: 'test1231awnkj3@qq.com', username: 'helei', password: '12321312312' },
+        { id: 5, proxy_protocol: 'http', host: 'test1', port: 'test1231awnkj3@qq.com', username: 'helei', password: '12321312312' },
+        { id: 6, proxy_protocol: 'http', host: 'test1', port: 'test1231awnkj3@qq.com', username: 'helei', password: '12321312312' }
       ]
     }
   },
   created() {
+
   },
   methods: {
     uploadDataListHandler(uploadAccountBaseInfoDataList) {
       console.log(uploadAccountBaseInfoDataList)
       this.$message('保存代理信息...' + uploadAccountBaseInfoDataList)
+      // 1. 上传
+
+      // 2. 成功，需刷新proxyInfoList，重新查一遍
+
+      // 3. 失败，则不管
     }
   }
 }
