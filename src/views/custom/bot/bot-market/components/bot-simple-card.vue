@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card">
     <div slot="header" class="clearfix">
-      <span class="box-card-title">{{ botSimpleInfo.name + 'lwndkwlndklnawkwdlwnlkdnlwndljwndwljndljwdw' }}</span>
+      <span class="box-card-title">{{ botSimpleInfo.name}}</span>
       <el-button
         size="mini"
         type="box-card-"
@@ -15,16 +15,25 @@
     <div class="clearfix">
       <pan-thumb
         class="box-card-image"
-        width="100px"
-        height="100px"
-        :image="botSimpleInfo.image"
+        width="75px"
+        height="75px"
+        :image="imageContent"
       >
-        vue-element-admin
       </pan-thumb>
 
-      <div class="box-card-describe">
-        {{ botSimpleInfo.describe }}
+      <div class="box-card-tag">
+        <el-tag
+          v-for="(value, jobName) in botSimpleInfo.jobParams"
+          style="margin: 4px"
+        >
+          {{ jobName }}
+        </el-tag>
       </div>
+    </div>
+    <div>
+      <aside class="box-card-describe" >
+        {{ botSimpleInfo.describe + 'aknfdkjawndjanwkdnkjandjkaakmdwlkalkwmdklamdlkawmdlkjdnawk'}}
+      </aside>
     </div>
   </el-card>
 </template>
@@ -32,6 +41,7 @@
 <script>
 
 import PanThumb from '@/components/PanThumb/index.vue'
+import {getAppPathImageBase64} from '@/utils/image'
 
 export default {
   name: 'BotSimpleCard',
@@ -40,7 +50,14 @@ export default {
     botSimpleInfo: {
       name: 'bot-name',
       describe: 'bot-describe',
-      image: 'https://wpimg.wallstcn.com/577965b9-bb9e-4e02-9f0c-095b41417191'
+      image: '',
+      jobParams: {}
+    }
+  },
+
+  data() {
+    return {
+      imageContent: ''
     }
   },
   methods: {
@@ -49,6 +66,11 @@ export default {
         path: '/bot-config/' + this.botSimpleInfo.id
       })
     }
+  },
+  created() {
+    getAppPathImageBase64(this.botSimpleInfo.image).then(response=>{
+      this.imageContent = response
+    })
   }
 }
 </script>
@@ -63,13 +85,17 @@ export default {
   float: left;
 }
 
-.box-card-describe {
+.box-card-tag {
   display: inline-block;
   height: 100px;
-  width: calc(100% - 120px);
+  width: calc(100% - 83px);
   float: right;
   border-left: #5a5e66;
   padding: 3px;
+
+}
+
+.box-card-describe{
 
   font-size: 14px;
   color: #666;
@@ -81,6 +107,7 @@ export default {
   text-overflow: ellipsis;
 }
 
+
 .box-card-title {
   width: 70%;
   overflow: hidden;
@@ -88,5 +115,8 @@ export default {
   white-space: nowrap; /* 如果需要多行省略可用下方样式替换 */
   margin: 8px 0;
   float: left;
+
+  font-weight: bold;
+  font-size: 21px;
 }
 </style>

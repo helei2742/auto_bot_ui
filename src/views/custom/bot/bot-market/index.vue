@@ -43,11 +43,11 @@
     <el-row
       :gutter="20"
       type="flex"
-      justify="space-around"
+      justify="center"
       style="margin-top:50px;flex-wrap: wrap;"
     >
-      <el-col v-for="info in botSimpleInfoList"
-              :span="5"
+      <el-col v-for="info in botInfoList"
+              :span="9"
               style="padding: 0;margin: 10px"
       >
         <bot-simple-card
@@ -55,6 +55,13 @@
         />
       </el-col>
     </el-row>
+
+    <div class="block">
+      <el-pagination
+        layout="prev, pager, next"
+        :total="listQuery.total">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -64,6 +71,7 @@ import MdInput from '@/components/MDinput'
 import DropdownMenu from '@/components/Share/DropdownMenu'
 import waves from '@/directive/waves/index.js'
 import BotSimpleCard from '@/views/custom/bot/bot-market/components/bot-simple-card.vue' // 水波纹指令
+import {pageQueryBot} from '@/api/custom/bot'
 
 export default {
   name: 'BotMarket',
@@ -76,55 +84,34 @@ export default {
   directives: {
     waves
   },
+  created() {
+
+    pageQueryBot({
+      page: this.listQuery.page,
+      limit: this.listQuery.limit
+    }).then(response=>{
+      const pageInfo = response.data
+
+      if (pageInfo != null) {
+        this.listQuery.total = pageInfo.total
+        this.botInfoList = pageInfo.list
+      } else {
+        this.$message.warning('查询bot list失败')
+      }
+    })
+  },
   data() {
     return {
-      botSimpleInfoList: [
+      listQuery: {
+        page: 1,
+        limit: 10,
+        total: 0
+      },
+      botInfoList: [
         {
           id: 1,
           name: 'test-bot-1',
           describe: 'bot detailnakjwndjkawndjknwajkdnakjwndjkawndjkawndjanwkjdnakjndjkawndjaw',
-          image: 'https://wpimg.wallstcn.com/577965b9-bb9e-4e02-9f0c-095b41417191'
-        },
-        {
-          id: 2,
-          name: 'test-bot-2',
-          describe: 'bot detail',
-          image: 'https://wpimg.wallstcn.com/577965b9-bb9e-4e02-9f0c-095b41417191'
-        },
-        {
-          id: 3,
-          name: 'test-bot-3',
-          describe: 'bot detail',
-          image: 'https://wpimg.wallstcn.com/577965b9-bb9e-4e02-9f0c-095b41417191'
-        },
-        {
-          id: 4,
-          name: 'test-bot-4',
-          describe: 'bot detail',
-          image: 'https://wpimg.wallstcn.com/577965b9-bb9e-4e02-9f0c-095b41417191'
-        },
-        {
-          id: 5,
-          name: 'test-bot-5',
-          describe: 'bot detail',
-          image: 'https://wpimg.wallstcn.com/577965b9-bb9e-4e02-9f0c-095b41417191'
-        },
-        {
-          id: 6,
-          name: 'test-bot-6',
-          describe: 'bot detail',
-          image: 'https://wpimg.wallstcn.com/577965b9-bb9e-4e02-9f0c-095b41417191'
-        },
-        {
-          id: 7,
-          name: 'test-bot-7',
-          describe: 'bot detail',
-          image: 'https://wpimg.wallstcn.com/577965b9-bb9e-4e02-9f0c-095b41417191'
-        },
-        {
-          id: 8,
-          name: 'test-bot-8',
-          describe: 'bot detail',
           image: 'https://wpimg.wallstcn.com/577965b9-bb9e-4e02-9f0c-095b41417191'
         }
       ]
