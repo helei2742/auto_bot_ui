@@ -15,33 +15,32 @@
         <el-dropdown-menu slot="dropdown">
           <el-checkbox-group v-model="currentParams.selectedFilterHeader">
             <el-dropdown-item v-for="item in headers">
-              <el-checkbox :label="item" disabled/>
+              <el-checkbox :label="item" disabled />
             </el-dropdown-item>
 
             <el-dropdown-item v-for="item in currentParams.customHeaders">
-              <el-checkbox :label="item"/>
+              <el-checkbox :label="item" />
             </el-dropdown-item>
           </el-checkbox-group>
         </el-dropdown-menu>
       </el-dropdown>
 
-
       <el-select
-        size="medium"
         v-for="headerName in headers"
         v-model="currentParams.headerFilterFieldValues[headerName]"
+        size="medium"
         :placeholder="headerName"
         clearable
         style="width: 90px"
         class="filter-item"
         @clear="currentParams.headerFilterFieldValues[headerName] = undefined"
       >
-        <el-option v-for="item in getFieldOptions(headerName)" :key="item" :label="item" :value="item"/>
+        <el-option v-for="item in getFieldOptions(headerName)" :key="item" :label="item" :value="item" />
       </el-select>
 
       <el-button
-        size="medium"
         v-waves
+        size="medium"
         class="filter-item"
         style="margin-left: 10px"
         type="primary"
@@ -51,8 +50,8 @@
         Search
       </el-button>
       <el-button
-        size="medium"
         v-if="useImportData"
+        size="medium"
         class="filter-item"
         style="margin-left: 10px;"
         type="primary"
@@ -62,9 +61,9 @@
         Add
       </el-button>
       <el-button
-        size="medium"
         v-if="useImportData"
         v-waves
+        size="medium"
         class="filter-item"
         type="success"
         icon="el-icon-upload"
@@ -92,7 +91,7 @@
       style="width: 100%;"
       @selection-change="handleSelectionChange"
     >
-      <el-table-column type="selection" width="55" fixed="left"/>
+      <el-table-column type="selection" width="55" fixed="left" />
 
       <el-table-column
         v-if="currentParams.customHeaders.indexOf(idField) < 0"
@@ -346,14 +345,12 @@ export default {
       if (this.useImportData) {
         this.importData.splice(idx, 1)
       } else {
-
         this.$confirm('是否删除该行数据?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-
-          const network =  this.deleteDataNetwork(row)
+          const network = this.deleteDataNetwork(row)
           if (network instanceof Promise) {
             network
               .then(response => {
@@ -421,7 +418,6 @@ export default {
             this.$message.error('上传失败, ' + e)
           })
       }
-
     },
     /**
      * 批量添加数据
@@ -453,7 +449,7 @@ export default {
         const originRow = this.currentParams.editLineRowMap[index]
 
         let isRPC = false
-        for (let key of Object.keys(row)) {
+        for (const key of Object.keys(row)) {
           if (originRow[key] !== row[key]) {
             isRPC = true
             break
@@ -462,7 +458,7 @@ export default {
 
         this.$set(this.currentParams.editLineRowMap, index, row)
         if (isRPC) {
-          const network =  this.updateDataNetwork(row)
+          const network = this.updateDataNetwork(row)
           if (network instanceof Promise) {
             network
               .then(response => {
@@ -535,8 +531,8 @@ export default {
       this.batchQueryDataNetwork(display.listQuery, display.headerFilterFieldValues, pageInfo => {
         this.data = pageInfo.list
 
-        for (let item of this.data) {
-          for (let key of Object.keys(item)) {
+        for (const item of this.data) {
+          for (const key of Object.keys(item)) {
             if (this.headers.indexOf(key) === -1 && this.currentParams.customHeaders.indexOf(key) === -1) {
               this.currentParams.customHeaders.push(key)
             }

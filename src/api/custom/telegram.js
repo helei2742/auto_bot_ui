@@ -1,6 +1,5 @@
 import request from '@/utils/custom_request'
 
-
 /**
  * 上传Telegram
  * @param telegramList telegramList

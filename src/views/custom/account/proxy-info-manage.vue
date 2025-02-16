@@ -12,11 +12,11 @@
 
 <script>
 import DynamicAddColTable from '@/views/custom/account/components/dynamic-add-col-table.vue'
-import {uploadProxyInfoList, pageQueryProxyInfo, deleteProxyInfo} from '@/api/custom/proxy-info'
+import { uploadProxyInfoList, pageQueryProxyInfo, deleteProxyInfo } from '@/api/custom/proxy-info'
 
 export default {
   name: 'ProxyInfoManage',
-  components: {DynamicAddColTable},
+  components: { DynamicAddColTable },
   filters: {},
   data() {
     return {
@@ -37,11 +37,11 @@ export default {
       }
 
       pageQueryProxyInfo(payload).then(response => {
-        let pageInfo = response.data
+        const pageInfo = response.data
 
-        for (let item of pageInfo.list) {
+        for (const item of pageInfo.list) {
           if (item.params !== undefined && item.params !== null) {
-            for (let key of Object.keys(item.params)) {
+            for (const key of Object.keys(item.params)) {
               item[key] = item.params[key]
             }
 

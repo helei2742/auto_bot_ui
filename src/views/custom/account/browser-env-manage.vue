@@ -12,7 +12,7 @@
 
 <script>
 import DynamicAddColTable from '@/views/custom/account/components/dynamic-add-col-table.vue'
-import {pageQueryBrowserEnv, deleteBrowserEnv, uploadBrowserEnvList} from '@/api/custom/browser-env'
+import { pageQueryBrowserEnv, deleteBrowserEnv, uploadBrowserEnvList } from '@/api/custom/browser-env'
 
 export default {
   name: 'BrowserEnvManage',
@@ -36,11 +36,11 @@ export default {
       }
 
       pageQueryBrowserEnv(payload).then(response => {
-        let pageInfo = response.data
+        const pageInfo = response.data
 
-        for (let abi of pageInfo.list) {
+        for (const abi of pageInfo.list) {
           if (abi.params !== undefined && abi.params !== null) {
-            for (let key of Object.keys(abi.params)) {
+            for (const key of Object.keys(abi.params)) {
               abi[key] = abi.params[key]
             }
 

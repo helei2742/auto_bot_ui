@@ -42,11 +42,11 @@ export default {
       }
       pageQueryTwitter(payload)
         .then(response => {
-          let pageInfo = response.data
+          const pageInfo = response.data
 
-          for (let abi of pageInfo.list) {
+          for (const abi of pageInfo.list) {
             if (abi.params !== undefined && abi.params !== null) {
-              for (let key of Object.keys(abi.params)) {
+              for (const key of Object.keys(abi.params)) {
                 abi[key] = abi.params[key]
               }
 
