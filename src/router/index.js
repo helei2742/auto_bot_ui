@@ -11,7 +11,7 @@ import componentsRouter from './modules/components'
 import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
 import nestedRouter from './modules/nested'
-import importRouter from './modules/import'
+import accountManageRouter from './modules/account-manage'
 import botRouter from './modules/bot'
 
 /**
@@ -87,7 +87,7 @@ export const constantRoutes = [
   },
 
   botRouter,
-  importRouter,
+  accountManageRouter,
 
   {
     path: '/documentation',

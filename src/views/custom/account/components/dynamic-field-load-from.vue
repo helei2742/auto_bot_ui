@@ -30,7 +30,7 @@
         </aside>
 
         <div class="editor-container">
-          <json-editor ref="jsonEditor" v-model="jsonValue" />
+          <json-editor ref="jsonEditor" v-model="jsonValue"/>
         </div>
       </div>
       <!--    excel类型数据导入-->
@@ -41,7 +41,7 @@
           需包含 {{ fieldNames }} 字段
         </aside>
 
-        <upload-excel-component :on-success="handleExcelUploadSuccess" :before-upload="beforeExcelUpload" />
+        <upload-excel-component :on-success="handleExcelUploadSuccess" :before-upload="beforeExcelUpload"/>
 
         <el-table
           :data="excelValue"
