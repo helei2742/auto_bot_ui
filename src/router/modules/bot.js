@@ -26,7 +26,7 @@ const botRouter = {
       meta: { title: 'my bot', icon: 'el-icon-s-grid' }
     },
     {
-      path: '/bot-config/:id',
+      path: '/bot-config',
       hidden: true,
       component: () => import('@/views/custom/bot/bot-config'),
       name: 'BotConfig',

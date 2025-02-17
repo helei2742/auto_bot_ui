@@ -1,3 +1,4 @@
+
 <template>
   <div class="mixin-components-container">
     <el-row>
@@ -40,27 +41,18 @@
       </el-card>
     </el-row>
 
-    <el-row
-      :gutter="20"
-      type="flex"
-      justify="center"
-      style="margin-top:50px;flex-wrap: wrap;"
-    >
-      <el-col v-for="info in botInfoList"
-              :span="9"
-              style="padding: 0;margin: 10px"
-      >
-        <bot-simple-card
-          :bot-simple-info="info"
-        />
-      </el-col>
-    </el-row>
+    <div class="bot-info-content">
+      <bot-simple-card
+        v-for="info in botInfoList"
+        :bot-simple-info="info"
+      />
+    </div>
 
     <div class="block">
       <el-pagination
         layout="prev, pager, next"
-        :total="listQuery.total">
-      </el-pagination>
+        :total="listQuery.total"
+      />
     </div>
   </div>
 </template>
@@ -71,7 +63,7 @@ import MdInput from '@/components/MDinput'
 import DropdownMenu from '@/components/Share/DropdownMenu'
 import waves from '@/directive/waves/index.js'
 import BotSimpleCard from '@/views/custom/bot/bot-market/components/bot-simple-card.vue' // 水波纹指令
-import {pageQueryBot} from '@/api/custom/bot'
+import { pageQueryBot } from '@/api/custom/bot'
 
 export default {
   name: 'BotMarket',
@@ -83,22 +75,6 @@ export default {
   },
   directives: {
     waves
-  },
-  created() {
-
-    pageQueryBot({
-      page: this.listQuery.page,
-      limit: this.listQuery.limit
-    }).then(response=>{
-      const pageInfo = response.data
-
-      if (pageInfo != null) {
-        this.listQuery.total = pageInfo.total
-        this.botInfoList = pageInfo.list
-      } else {
-        this.$message.warning('查询bot list失败')
-      }
-    })
   },
   data() {
     return {
@@ -116,10 +92,30 @@ export default {
         }
       ]
     }
+  },
+  created() {
+    pageQueryBot({
+      page: this.listQuery.page,
+      limit: this.listQuery.limit
+    }).then(response => {
+      const pageInfo = response.data
+
+      if (pageInfo != null) {
+        this.listQuery.total = pageInfo.total
+        this.botInfoList = pageInfo.list
+      } else {
+        this.$message.warning('查询bot list失败')
+      }
+    })
   }
 }
 </script>
 
 <style scoped>
-
+.bot-info-content{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
 </style>

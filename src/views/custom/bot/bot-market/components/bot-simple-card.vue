@@ -1,14 +1,14 @@
 <template>
-  <el-card class="box-card">
+  <el-card class="box-card-style">
     <div slot="header" class="clearfix">
-      <span class="box-card-title">{{ botSimpleInfo.name}}</span>
+      <span class="box-card-title">{{ botSimpleInfo.name }}</span>
       <el-button
         size="mini"
         type="box-card-"
         icon="el-icon-plus"
         style="float: right; "
-        @click="routeToBotConfig"
         circle
+        @click="routeToBotConfig"
       />
     </div>
 
@@ -18,8 +18,7 @@
         width="75px"
         height="75px"
         :image="imageContent"
-      >
-      </pan-thumb>
+      />
 
       <div class="box-card-tag">
         <el-tag
@@ -31,8 +30,8 @@
       </div>
     </div>
     <div>
-      <aside class="box-card-describe" >
-        {{ botSimpleInfo.describe + 'aknfdkjawndjanwkdnkjandjkaakmdwlkalkwmdklamdlkawmdlkjdnawk'}}
+      <aside class="box-card-describe">
+        {{ botSimpleInfo.describe + 'aknfdkjawndjanwkdnkjandjkaakmdwlkalkwmdklamdlkawmdlkjdnawk' }}
       </aside>
     </div>
   </el-card>
@@ -41,7 +40,7 @@
 <script>
 
 import PanThumb from '@/components/PanThumb/index.vue'
-import {getAppPathImageBase64} from '@/utils/image'
+import { getAppPathImageBase64 } from '@/utils/image'
 
 export default {
   name: 'BotSimpleCard',
@@ -60,25 +59,28 @@ export default {
       imageContent: ''
     }
   },
+  created() {
+    getAppPathImageBase64(this.botSimpleInfo.image).then(response => {
+      this.imageContent = response
+    })
+  },
   methods: {
     routeToBotConfig() {
       this.$router.push({
-        path: '/bot-config/' + this.botSimpleInfo.id
+        path: '/bot-config',
+        query: {
+          botInfo: this.botSimpleInfo
+        }
       })
     }
-  },
-  created() {
-    getAppPathImageBase64(this.botSimpleInfo.image).then(response=>{
-      this.imageContent = response
-    })
   }
 }
 </script>
 
 <style scoped>
-.box-card {
+.box-card-style {
   width: 380px;
-  max-width: 100%;
+  margin: 15px;
 }
 
 .box-card-image {
@@ -106,7 +108,6 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 
 .box-card-title {
   width: 70%;

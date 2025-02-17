@@ -33,6 +33,16 @@ export function pageQueryAccountBaseInfo({ page, limit, filterMap }) {
 }
 
 /**
+ * 获取AccountBaseInfo 根据type分类的信息
+ */
+export function queryAccountBaseInfoTypedInfo() {
+  return request({
+    url: '/accountBaseInfo/typedInfo',
+    method: 'get'
+  })
+}
+
+/**
  * 删除账户，根据id
  * @param ids
  * @returns {*}
