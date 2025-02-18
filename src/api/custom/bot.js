@@ -23,7 +23,7 @@ export function pageQueryBot({ page, limit, filterMap }) {
  * @param botKey
  * @param accountIds
  */
-export function createBot({botId, botKey, accountIds}) {
+export function createBot({ botId, botKey, accountIds }) {
   return request({
     url: '/bot/create',
     method: 'post',

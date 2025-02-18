@@ -2,7 +2,7 @@
   <div class="components-container">
 
     <el-row :span="24">
-      <bot-info-card :bot-info="botInfo"/>
+      <bot-info-card :bot-info="botInfo" />
     </el-row>
 
     <el-row :span="24">
@@ -12,7 +12,7 @@
         <div>
           <h3 style="padding: 0 15px">运行账户设置</h3>
           <div class="center">
-            <el-input v-model="botKey" style="width: 430px;padding: 0" placeholder="请输入Bot名称"/>
+            <el-input v-model="botKey" style="width: 430px;padding: 0" placeholder="请输入Bot名称" />
           </div>
           <div class="center">
             <el-transfer
@@ -21,9 +21,9 @@
               :titles="['未添加', '已添加']"
               :data="selectionList"
               :format="{
-            noChecked:  '',
-            hasChecked: '${checked}/${total}'
-          }"
+                noChecked: '',
+                hasChecked: '${checked}/${total}'
+              }"
               filterable
             >
               <span slot-scope="{ option }">{{ option.key }} - {{ option.name }}-{{ option.email }}</span>
@@ -73,8 +73,8 @@ import BotInfoCard from '@/views/custom/bot/bot-config/components/bot-info-card.
 import DndList from '@/components/DndList/index.vue'
 import LeftRightSelector from '@/views/custom/components/left-right-selector.vue'
 import { pageQueryAccountBaseInfo, queryAccountBaseInfoTypedInfo } from '@/api/custom/account-base-info'
-import { createBot } from "@/api/custom/bot";
-import Index from "@/views/dashboard/admin/components/TodoList/index.vue";
+import { createBot } from '@/api/custom/bot'
+import Index from '@/views/dashboard/admin/components/TodoList/index.vue'
 
 export default {
   name: 'BotConfig',
@@ -153,7 +153,6 @@ export default {
         pageDataMap !== undefined && pageDataMap !== null &&
         pageDataMap[page] !== undefined && pageDataMap[page] !== null
       ) {
-
         this.selectionList = this.calPrintTotal(pageDataMap, page)
 
         return
@@ -189,15 +188,15 @@ export default {
       this.queryTypedABIPageData(this.currentPage, this.defaultLimit, type)
     },
     addBotHandler() {
-      const botKey = this.botKey;
+      const botKey = this.botKey
       if (botKey === undefined || botKey === null || botKey === '') {
-        this.$message.warning("请输入bot名称")
+        this.$message.warning('请输入bot名称')
         return
       }
 
-      const botId = this.botId;
+      const botId = this.botId
       if (botId === undefined || botId === null || botId === '') {
-        this.$message.error("请关闭页面重新进入")
+        this.$message.error('请关闭页面重新进入')
         return
       }
 

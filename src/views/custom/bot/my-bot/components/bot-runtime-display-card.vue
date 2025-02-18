@@ -2,29 +2,25 @@
   <div class="bot-runtime-display-card">
     <div class="card-header clearfix">
       <div style="display:flex; float: left">
-        <el-image class="head-image"/>
+        <el-image class="head-image" />
         <div style="font-weight: 700;font-size: 16px">
           {{ botInfo.name }}
         </div>
       </div>
 
       <div style="float: right">
-        <i class="el-icon-setting icon-button"/>
+        <i class="el-icon-setting icon-button" />
       </div>
     </div>
 
-    <div class="data-print-line">
-
-    </div>
+    <div class="data-print-line" />
 
     <div class="card-detail">
-      <div class="card-detail-content">
+      <div class="card-detail-content" />
 
-      </div>
-
-        <el-button class="start-button" icon="el-icon-video-play" type="success" plain>
-          Start Auto Bot
-        </el-button>
+      <el-button class="start-button" icon="el-icon-video-play" type="success" plain>
+        Start Auto Bot
+      </el-button>
     </div>
   </div>
 </template>

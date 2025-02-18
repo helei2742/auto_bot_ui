@@ -1,16 +1,14 @@
 <template>
-<div class="my-bot">
-  <div class="top-tool-bar">
+  <div class="my-bot">
+    <div class="top-tool-bar" />
 
+    <div class="bot-info-content">
+
+      <bot-runtime-display-card />
+      <bot-runtime-display-card />
+      <bot-runtime-display-card />
+    </div>
   </div>
-
-  <div class="bot-info-content">
-
-    <bot-runtime-display-card/>
-    <bot-runtime-display-card/>
-    <bot-runtime-display-card/>
-  </div>
-</div>
 
 </template>
 
