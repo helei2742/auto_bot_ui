@@ -16,3 +16,21 @@ export function pageQueryBot({ page, limit, filterMap }) {
     }
   })
 }
+
+/**
+ * 创建bot
+ * @param botId
+ * @param botKey
+ * @param accountIds
+ */
+export function createBot({botId, botKey, accountIds}) {
+  return request({
+    url: '/bot/create',
+    method: 'post',
+    data: {
+      botId,
+      botKey,
+      accountIds
+    }
+  })
+}

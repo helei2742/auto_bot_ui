@@ -178,6 +178,7 @@ export default {
   height: 350px;
   padding: 25px 20px;
   width: calc(100% - 303px);
+  min-width: 300px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); /* 设置阴影效果 */
   border-radius: 5px;
   background-color: #fff;

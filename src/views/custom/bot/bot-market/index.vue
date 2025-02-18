@@ -113,8 +113,9 @@ export default {
 
 <style scoped>
 .bot-info-content{
+  padding: 0 25px 0px;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-wrap: wrap;
   margin-top: 20px;
 }

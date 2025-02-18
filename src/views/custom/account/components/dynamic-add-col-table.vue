@@ -159,7 +159,7 @@
         <template #default="scope">
           <el-button
             v-if="currentParams.editLineIndexMap[scope.$index]"
-            size="small"
+            size="mini"
             type="success"
             :loading="currentParams.updatingLineIndexMap[scope.$index]"
             :disabled="currentParams.updatingLineIndexMap[scope.$index]"
@@ -170,14 +170,14 @@
           <el-button
             v-else
             type="info"
-            size="small"
+            size="mini"
             @click="handleEdit(scope.$index, scope.row)"
           >
             Edit
           </el-button>
 
           <el-button
-            size="small"
+            size="mini"
             type="danger"
             @click="handleDelete(scope.$index, scope.row)"
           >
